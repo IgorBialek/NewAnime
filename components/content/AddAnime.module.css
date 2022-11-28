@@ -1,0 +1,27 @@
+.addAnimeContainer {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  font-weight: bold;
+  padding: 15px;
+  border-radius: 15px;
+  border: 0;
+  margin-right: 15px;
+  background-color: var(--color-3);
+  color: var(--color-text);
+  width: 50%;
+
+  transition: 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  background-color: var(--color-2);
+
+  transition: 0.2s;
+}

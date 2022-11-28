@@ -1,0 +1,33 @@
+.animeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 7.5px 15px;
+  border-radius: 15px;
+
+  background-color: var(--color-3);
+  color: var(--color-text);
+
+  user-select: none;
+}
+
+.animeContainer p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.animeContainer > svg {
+  font-size: 25px;
+  margin-left: 7.5px;
+  padding: 2.5px;
+
+  transition: 0.2s;
+}
+
+.animeContainer > svg:hover {
+  background-color: var(--color-2);
+  border-radius: 50%;
+  transition: 0.2s;
+}

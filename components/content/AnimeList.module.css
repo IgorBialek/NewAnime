@@ -1,0 +1,12 @@
+.animeListContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.scrollContainer {
+  display: flex;
+  max-width: 50%;
+  gap: 15px;
+}
