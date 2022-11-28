@@ -1,0 +1,39 @@
+.buttonContainer {
+  font-weight: bold;
+  color: var(--color-text);
+  padding: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 15px;
+
+  transition: 0.2s;
+}
+
+.buttonContainer > svg {
+  margin-right: 7.5px;
+  font-size: 30px;
+}
+
+.buttonContainer:hover {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.primary {
+  background-color: var(--color-accent);
+}
+
+.primary:hover {
+  background-color: var(--color-accent-dark);
+}
+
+.secondary {
+  background-color: var(--color-3);
+}
+
+.secondary:hover {
+  background-color: var(--color-2);
+}
