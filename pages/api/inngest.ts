@@ -1,16 +1,14 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { load } from 'cheerio';
 import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { createScheduledFunction } from 'inngest';
+// ./pages/api/inngest.js
+import { serve } from 'inngest/next';
 
-import { firestore } from '../../../firebase';
-import newEpisode from '../../../models/newEpisode';
-import observedAnime from '../../../models/observedAnime';
+import { firestore } from '../../firebase';
+import newEpisode from '../../models/newEpisode';
+import observedAnime from '../../models/observedAnime';
 
-import type { NextApiRequest, NextApiResponse } from "next";
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<{ status: string }>
-) {
+const job = async () => {
   let status = "Success";
 
   try {
@@ -55,5 +53,9 @@ export default async function handler(
     status = "Failure";
   }
 
-  res.status(200).json({ status });
-}
+  return status;
+};
+
+export default serve("NewAnime", [
+  createScheduledFunction("Episode Checker", "*/5 * * * *", job),
+]);

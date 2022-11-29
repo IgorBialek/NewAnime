@@ -1,5 +1,14 @@
 .animeContainer {
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 750px;
+}
+
+.animeTitle {
+  display: flex;
   justify-content: flex-start;
   align-items: center;
   background-color: var(--color-3);
@@ -7,21 +16,20 @@
   padding: 15px;
   border-radius: 15px;
   width: 100%;
-  max-width: 750px;
   transition: 0.2s;
 }
 
-.animeContainer img {
+.animeTitle img {
   border-radius: 50%;
 }
 
-.animeContainer p {
+.animeTitle p {
   margin: 0;
   margin-left: 30px;
   font-size: 30px;
 }
 
-.animeContainer:hover {
+.animeTitle:hover {
   cursor: pointer;
 }
 .expanded {
