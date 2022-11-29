@@ -57,5 +57,5 @@ const job = async () => {
 };
 
 export default serve("NewAnime", [
-  createScheduledFunction("Episode Checker", "*/5 * * * *", job),
+  createScheduledFunction("Episode Checker", "*/15 * * * *", job),
 ]);
