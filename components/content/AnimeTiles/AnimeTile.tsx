@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
 
-import css from './Anime.module.css';
+import css from './AnimeTile.module.css';
 
-const Anime: FC<{ name: string; onDelete: (name: string) => void }> = ({
+const AnimeTile: FC<{ name: string; onDelete: (name: string) => void }> = ({
   name,
   onDelete,
 }) => {
@@ -15,4 +15,4 @@ const Anime: FC<{ name: string; onDelete: (name: string) => void }> = ({
   );
 };
 
-export default Anime;
+export default AnimeTile;

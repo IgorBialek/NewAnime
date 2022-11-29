@@ -16,12 +16,10 @@ export default async function handler(
 
   let anime: observedAnime = {
     name: $(".entry-title").text(),
-    image:
-      $(
-        "div.bixbox.animefull > div.bigcontent > div.thumbook > div.thumb > img"
-      ).attr("src") ?? "",
+    image: $(".thumb > img").attr("data-src") ?? "",
     lastSeenEpisode: $(".eplister > ul > li > a").length,
     url,
+    episodes: [],
   };
 
   res.status(200).json(anime);

@@ -4,12 +4,12 @@ import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { modalAtom } from '../../atoms/modal';
-import { observedAnimeListAtom } from '../../atoms/observedAnimeList';
-import { firestore } from '../../firebase';
-import observedAnime from '../../models/observedAnime';
-import Button from '../interface/Button';
-import Error from '../interface/Error';
+import { modalAtom } from '../../../atoms/modal';
+import { observedAnimeListAtom } from '../../../atoms/observedAnimeList';
+import { firestore } from '../../../firebase';
+import observedAnime from '../../../models/observedAnime';
+import Button from '../../interface/Button';
+import Error from '../../interface/Error';
 import css from './AddAnime.module.css';
 
 let pattern = ["https:", "", "desu-online.pl", "anime", "", ""];

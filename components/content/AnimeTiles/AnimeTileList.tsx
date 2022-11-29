@@ -5,12 +5,12 @@ import { useSession } from 'next-auth/react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useRecoilValue } from 'recoil';
 
-import { observedAnimeListAtom } from '../../atoms/observedAnimeList';
-import { firestore } from '../../firebase';
-import Anime from './Anime';
-import css from './AnimeList.module.css';
+import { observedAnimeListAtom } from '../../../atoms/observedAnimeList';
+import { firestore } from '../../../firebase';
+import AnimeTile from './AnimeTile';
+import css from './AnimeTileList.module.css';
 
-const AnimeList = () => {
+const AnimeTileList = () => {
   const { data: session } = useSession();
   const observedAnimeList = useRecoilValue(observedAnimeListAtom);
 
@@ -31,11 +31,11 @@ const AnimeList = () => {
         mouseScroll={{ ignoreElements: "svg" }}
       >
         {observedAnimeList.map((a) => (
-          <Anime key={a.name} name={a.name} onDelete={deleteHandler} />
+          <AnimeTile key={a.name} name={a.name} onDelete={deleteHandler} />
         ))}
       </ScrollContainer>
     </div>
   );
 };
 
-export default AnimeList;
+export default AnimeTileList;

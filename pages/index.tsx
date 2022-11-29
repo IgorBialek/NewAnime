@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 
-import Home from '../components/content/Home';
+import Home from '../components/content/Home/Home';
 
 const HomePage = () => {
   return <Home />;
