@@ -38,7 +38,7 @@ const EpisodeList: FC<{ episodes: newEpisode[]; animeName: string }> = ({
   return (
     <div className={css.episodeListContainer}>
       {episodes.map((e) => (
-        <Episode episode={e} onDelete={deleteHandler} />
+        <Episode key={e.number} episode={e} onDelete={deleteHandler} />
       ))}
     </div>
   );

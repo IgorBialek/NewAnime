@@ -10,7 +10,7 @@ const AnimeList = () => {
   return (
     <div className={css.animeListContainer}>
       {observedAnimeList.map((a) => (
-        <Anime anime={a} />
+        <Anime key={a.name} anime={a} />
       ))}
     </div>
   );
