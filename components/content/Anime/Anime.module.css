@@ -21,12 +21,17 @@
 
 .animeTitle img {
   border-radius: 50%;
+  min-width: 40px;
+  min-height: 40px;
 }
 
 .animeTitle p {
   margin: 0;
-  margin-left: 30px;
+  margin: 0 30px;
   font-size: 30px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: calc(100% -110px);
 }
 
 .animeTitle:hover {
@@ -48,4 +53,10 @@
 
 .actions svg {
   font-size: 40px;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.mobileName {
+  font-size: 15px !important;
 }

@@ -6,7 +6,11 @@
 }
 
 .scrollContainer {
-  display: flex;
   max-width: 50%;
   gap: 15px;
+  display: flex;
+}
+
+.mobileScrollContainer {
+  max-width: 100%;
 }

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { doc, setDoc } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { modalAtom } from '../../../atoms/modal';
@@ -16,6 +17,7 @@ let pattern = ["https:", "", "desu-online.pl", "anime", "", ""];
 
 const AddAnime = () => {
   const { data: session } = useSession();
+  const isMobile = useMediaQuery({ maxWidth: 1024 });
   const [inputUrl, setInputUrl] = useState("");
   const observedAnimeList = useRecoilValue(observedAnimeListAtom);
   const setModal = useSetRecoilState(modalAtom);
@@ -62,8 +64,6 @@ const AddAnime = () => {
           })
         ).data;
 
-        console.log(observedAnimeList, anime);
-
         if (observedAnimeList.some((a) => a.url === anime.url)) {
           setModal({
             showModal: true,
@@ -108,7 +108,7 @@ const AddAnime = () => {
     <div className={css.addAnimeContainer}>
       <input
         type={"url"}
-        className={css.input}
+        className={`${css.input} ${isMobile ? css.mobileInput : ""}`}
         placeholder={"https://desu-online.pl/anime/one-piece/"}
         value={inputUrl}
         onInput={inputHandler}

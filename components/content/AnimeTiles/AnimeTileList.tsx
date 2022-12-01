@@ -3,6 +3,7 @@ import 'react-indiana-drag-scroll/dist/style.css';
 import { doc, setDoc } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import { useMediaQuery } from 'react-responsive';
 import { useRecoilValue } from 'recoil';
 
 import { observedAnimeListAtom } from '../../../atoms/observedAnimeList';
@@ -12,6 +13,7 @@ import css from './AnimeTileList.module.css';
 
 const AnimeTileList = () => {
   const { data: session } = useSession();
+  const isMobile = useMediaQuery({ maxWidth: 1024 });
   const observedAnimeList = useRecoilValue(observedAnimeListAtom);
 
   const deleteHandler = async (name: string) => {
@@ -27,7 +29,9 @@ const AnimeTileList = () => {
   return (
     <div className={css.animeListContainer}>
       <ScrollContainer
-        className={css.scrollContainer}
+        className={`${css.scrollContainer} ${
+          isMobile ? css.mobileScrollContainer : ""
+        }`}
         mouseScroll={{ ignoreElements: "svg" }}
       >
         {observedAnimeList.map((a) => (
