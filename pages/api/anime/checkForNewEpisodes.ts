@@ -1,6 +1,7 @@
+import axios, { AxiosError } from 'axios';
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { load } from 'cheerio';
-import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 
 import { firestore } from '../../../firebase';
 import newEpisode from '../../../models/newEpisode';
@@ -12,6 +13,55 @@ export default async function handler(
   res: NextApiResponse<{ status: string }>
 ) {
   let status = "Success";
+
+  const sendMessage = async (
+    messengerId: string,
+    anime: string,
+    episode: string,
+    episodeNumber: number,
+    url: string
+  ) => {
+    let request_body = {
+      recipient: {
+        id: messengerId,
+      },
+      message: {
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "button",
+            text: `New episode #${episodeNumber} ${episode} of ${anime} just came out!`,
+            buttons: [
+              {
+                type: "web_url",
+                url: "https://newanime.vercel.app",
+                title: "Open app",
+                webview_height_ratio: "full",
+              },
+              {
+                type: "web_url",
+                url: url,
+                title: "Watch now!",
+                webview_height_ratio: "full",
+              },
+            ],
+          },
+        },
+      },
+    };
+
+    try {
+      await axios.request({
+        url: "https://graph.facebook.com/v2.6/me/messages",
+        method: "post",
+        params: { access_token: process.env.MESSENGER_TOKEN },
+        data: request_body,
+      });
+    } catch (error) {
+      const e = error as AxiosError;
+      console.log(e.response?.data);
+    }
+  };
 
   try {
     const cloudscraper = require("cloudscraper");
@@ -25,6 +75,10 @@ export default async function handler(
         observedAnimeList: observedAnime[];
       };
 
+      let messengerIdSnapshot = await getDoc(
+        doc(firestore, "messengerId", document.id)
+      );
+
       for (const anime of observedAnimeList) {
         let html = await cloudscraper.get(anime.url);
         const $ = load(html);
@@ -33,14 +87,23 @@ export default async function handler(
 
         episodeList.each((i, el) => {
           if (i < episodeList.length - anime.lastSeenEpisode) {
+            let title = $(el).find(".epl-title").text();
+            let number = episodeList.length - i;
+            let url = $(el).attr("href") ?? "";
+
             anime.episodes = [
               ...anime.episodes,
               {
-                title: $(el).find(".epl-title").text(),
-                number: episodeList.length - i,
-                url: $(el).attr("href"),
+                title,
+                number,
+                url,
               } as newEpisode,
             ];
+
+            if (messengerIdSnapshot.exists()) {
+              let { id } = messengerIdSnapshot.data();
+              sendMessage(id, anime.name, title, number, url);
+            }
           }
         });
 

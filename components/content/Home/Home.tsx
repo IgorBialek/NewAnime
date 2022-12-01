@@ -7,6 +7,7 @@ import Modal from '../../interface/Modal';
 import AddAnime from '../AddAnime/AddAnime';
 import AnimeList from '../Anime/AnimeList';
 import AnimeTileList from '../AnimeTiles/AnimeTileList';
+import MessengerConfig from '../MessengerConfig/MessengerConfig';
 import css from './Home.module.css';
 
 const Home = () => {
@@ -21,6 +22,7 @@ const Home = () => {
       <AddAnime />
       <AnimeTileList />
       <AnimeList />
+      <MessengerConfig />
     </div>
   );
 };
