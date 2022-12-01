@@ -1,6 +1,6 @@
 .addAnimeContainer {
   width: 100%;
-
+  gap: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@
   padding: 15px;
   border-radius: 15px;
   border: 0;
-  margin-right: 15px;
+
   background-color: var(--color-3);
   color: var(--color-text);
   width: 50%;
@@ -28,4 +28,21 @@
 
 .mobileInput {
   width: 100%;
+}
+
+.addAnimeContainer svg {
+  font-size: 19px;
+  margin: 0;
+  color: var(--color-text);
+  animation: rotate infinite 1s;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
 }

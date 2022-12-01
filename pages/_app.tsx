@@ -2,6 +2,7 @@ import '@fontsource/rubik';
 import '../styles/globals.css';
 
 import { SessionProvider } from 'next-auth/react';
+import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
 
 import SnapshotProvider from '../components/firebase/SnapshotProvider';
@@ -12,7 +13,12 @@ export default function App({ Component, pageProps }: AppProps) {
     <RecoilRoot>
       <SessionProvider session={pageProps.session}>
         <SnapshotProvider>
-          <Component {...pageProps} />
+          <>
+            <Head>
+              <title>NewAnime</title>
+            </Head>
+            <Component {...pageProps} />
+          </>
         </SnapshotProvider>
       </SessionProvider>
     </RecoilRoot>

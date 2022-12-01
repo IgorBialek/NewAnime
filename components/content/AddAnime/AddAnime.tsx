@@ -2,6 +2,7 @@ import axios from 'axios';
 import { doc, setDoc } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
+import { RiRefreshLine } from 'react-icons/ri';
 import { useMediaQuery } from 'react-responsive';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -19,14 +20,18 @@ const AddAnime = () => {
   const { data: session } = useSession();
   const isMobile = useMediaQuery({ maxWidth: 1024 });
   const [inputUrl, setInputUrl] = useState("");
+  const [isLoaded, setIsLoaded] = useState(true);
   const observedAnimeList = useRecoilValue(observedAnimeListAtom);
   const setModal = useSetRecoilState(modalAtom);
 
   const hideModal = () => {
+    setIsLoaded(true);
     setModal({ showModal: false, modalChild: <></> });
   };
 
   const addHandler = async () => {
+    setIsLoaded(false);
+
     if (
       !inputUrl.split("/").every((s, i) => {
         if (i === 4) {
@@ -98,6 +103,7 @@ const AddAnime = () => {
     }
 
     setInputUrl("");
+    setIsLoaded(true);
   };
 
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +119,9 @@ const AddAnime = () => {
         value={inputUrl}
         onInput={inputHandler}
       />
-      <Button onClick={addHandler}>Add</Button>
+      <Button onClick={addHandler}>
+        {isLoaded ? "Add" : <RiRefreshLine />}
+      </Button>
     </div>
   );
 };
