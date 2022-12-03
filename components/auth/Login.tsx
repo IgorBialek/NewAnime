@@ -1,5 +1,5 @@
 import { signIn } from 'next-auth/react';
-import { RiGoogleFill } from 'react-icons/ri';
+import { RiGoogleFill, RiSpyLine } from 'react-icons/ri';
 
 import Button from '../interface/Button';
 import css from './Login.module.css';
@@ -12,6 +12,13 @@ const Login = () => {
         onClick={() => signIn("google", { callbackUrl: "/" })}
       >
         Login with Google
+      </Button>
+      <Button
+        type="secondary"
+        icon={<RiSpyLine />}
+        onClick={() => signIn("preview", { callbackUrl: "/" })}
+      >
+        Preview
       </Button>
     </div>
   );

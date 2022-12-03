@@ -100,7 +100,9 @@ const job = async () => {
 
             if (messengerIdSnapshot.exists()) {
               let { id } = messengerIdSnapshot.data();
-              sendMessage(id, anime.name, title, number, url);
+              if (id) {
+                sendMessage(id, anime.name, title, number, url);
+              }
             }
           }
         });

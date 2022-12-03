@@ -8,12 +8,12 @@ const messengerIdSnapshot = (
   setMessengerId: SetterOrUpdater<string>
 ) => {
   return onSnapshot(doc(firestore, "messengerId", email), (doc) => {
-    let { id } = doc.data() as {
+    let data = doc.data() as {
       id: string;
     };
 
-    if (id) {
-      setMessengerId(id);
+    if (data && data.id) {
+      setMessengerId(data.id);
     }
   });
 };

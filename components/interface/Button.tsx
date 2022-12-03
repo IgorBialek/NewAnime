@@ -7,11 +7,14 @@ const Button: FC<
     icon?: ReactElement;
     onClick?: () => void;
     type?: string;
+    className?: string;
   }>
-> = ({ children, icon, onClick, type }) => {
+> = ({ children, icon, onClick, type, className }) => {
   return (
     <div
-      className={`${css.buttonContainer} ${css[type ?? "primary"]}`}
+      className={`${css.buttonContainer} ${className} ${
+        css[type ?? "primary"]
+      }`}
       onClick={onClick}
     >
       {icon}

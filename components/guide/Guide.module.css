@@ -1,0 +1,30 @@
+.guideContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 25px;
+  background-color: var(--color-1);
+  border-radius: 15px;
+  width: 25%;
+  word-break: break-word;
+  color: var(--color-text);
+}
+
+@media (max-width: 1024px) {
+  .guideContainer {
+    width: 75%;
+  }
+}
+
+.guideContainer h1 {
+  text-align: center;
+}
+
+.guideContainer a {
+  text-decoration: underline;
+}
+
+.button {
+  align-self: flex-end;
+}

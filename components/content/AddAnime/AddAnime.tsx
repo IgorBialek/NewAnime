@@ -2,7 +2,7 @@ import axios from 'axios';
 import { doc, setDoc } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
-import { RiRefreshLine } from 'react-icons/ri';
+import { RiRefreshLine, RiSearchLine } from 'react-icons/ri';
 import { useMediaQuery } from 'react-responsive';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -110,8 +110,17 @@ const AddAnime = () => {
     setInputUrl(e.currentTarget.value);
   };
 
+  const openHandler = () => {
+    if (window) {
+      window.open("https://desu-online.pl/anime/list-mode/", "_blank");
+    }
+  };
+
   return (
     <div className={css.addAnimeContainer}>
+      <Button type="secondary" onClick={openHandler}>
+        <RiSearchLine />
+      </Button>
       <input
         type={"url"}
         className={`${css.input} ${isMobile ? css.mobileInput : ""}`}
@@ -119,7 +128,7 @@ const AddAnime = () => {
         value={inputUrl}
         onInput={inputHandler}
       />
-      <Button onClick={addHandler}>
+      <Button className={css.rotate} onClick={addHandler}>
         {isLoaded ? "Add" : <RiRefreshLine />}
       </Button>
     </div>

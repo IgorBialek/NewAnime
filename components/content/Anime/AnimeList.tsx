@@ -7,6 +7,10 @@ import css from './AnimeList.module.css';
 const AnimeList = () => {
   const observedAnimeList = useRecoilValue(observedAnimeListAtom);
 
+  if (observedAnimeList.length === 0) {
+    return <h1 className={css.noItems}>Add some anime to observe!</h1>;
+  }
+
   return (
     <div className={css.animeListContainer}>
       {observedAnimeList.map((a) => (

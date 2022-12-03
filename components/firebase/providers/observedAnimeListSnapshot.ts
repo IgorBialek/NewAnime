@@ -9,12 +9,12 @@ const observedAnimeListSnapshot = (
   setObservedAnimeList: SetterOrUpdater<observedAnime[]>
 ) => {
   return onSnapshot(doc(firestore, "observedAnimeList", email), (doc) => {
-    let { observedAnimeList } = doc.data() as {
+    let data = doc.data() as {
       observedAnimeList: observedAnime[];
     };
 
-    if (observedAnimeList) {
-      setObservedAnimeList(observedAnimeList);
+    if (data && data.observedAnimeList) {
+      setObservedAnimeList(data.observedAnimeList);
     }
   });
 };
