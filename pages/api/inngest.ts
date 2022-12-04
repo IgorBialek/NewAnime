@@ -61,62 +61,66 @@ const job = async () => {
     }
   };
 
-  try {
-    const cloudscraper = require("cloudscraper");
+  const processData = async () => {
+    try {
+      const cloudscraper = require("cloudscraper");
 
-    const querySnapshot = await getDocs(
-      collection(firestore, "observedAnimeList")
-    );
-
-    for (const document of querySnapshot.docs) {
-      let { observedAnimeList } = document.data() as {
-        observedAnimeList: observedAnime[];
-      };
-
-      let messengerIdSnapshot = await getDoc(
-        doc(firestore, "messengerId", document.id)
+      const querySnapshot = await getDocs(
+        collection(firestore, "observedAnimeList")
       );
 
-      for (const anime of observedAnimeList) {
-        let html = await cloudscraper.get(anime.url);
-        const $ = load(html);
+      for (const document of querySnapshot.docs) {
+        let { observedAnimeList } = document.data() as {
+          observedAnimeList: observedAnime[];
+        };
 
-        let episodeList = $(".eplister > ul > li > a");
+        let messengerIdSnapshot = await getDoc(
+          doc(firestore, "messengerId", document.id)
+        );
 
-        episodeList.each((i, el) => {
-          if (i < episodeList.length - anime.lastSeenEpisode) {
-            let title = $(el).find(".epl-title").text();
-            let number = episodeList.length - i;
-            let url = $(el).attr("href") ?? "";
+        for (const anime of observedAnimeList) {
+          let html = await cloudscraper.get(anime.url);
+          const $ = load(html);
 
-            anime.episodes = [
-              ...anime.episodes,
-              {
-                title,
-                number,
-                url,
-              } as newEpisode,
-            ];
+          let episodeList = $(".eplister > ul > li > a");
 
-            if (messengerIdSnapshot.exists()) {
-              let { id } = messengerIdSnapshot.data();
-              if (id) {
-                sendMessage(id, anime.name, title, number, url);
+          episodeList.each((i, el) => {
+            if (i < episodeList.length - anime.lastSeenEpisode) {
+              let title = $(el).find(".epl-title").text();
+              let number = episodeList.length - i;
+              let url = $(el).attr("href") ?? "";
+
+              anime.episodes = [
+                ...anime.episodes,
+                {
+                  title,
+                  number,
+                  url,
+                } as newEpisode,
+              ];
+
+              if (messengerIdSnapshot.exists()) {
+                let { id } = messengerIdSnapshot.data();
+                if (id) {
+                  sendMessage(id, anime.name, title, number, url);
+                }
               }
             }
-          }
+          });
+
+          anime.lastSeenEpisode = episodeList.length;
+        }
+
+        await setDoc(doc(firestore, "observedAnimeList", document.id), {
+          observedAnimeList,
         });
-
-        anime.lastSeenEpisode = episodeList.length;
       }
-
-      await setDoc(doc(firestore, "observedAnimeList", document.id), {
-        observedAnimeList,
-      });
+    } catch {
+      status = "Failure";
     }
-  } catch {
-    status = "Failure";
-  }
+  };
+
+  processData();
 
   return status;
 };
