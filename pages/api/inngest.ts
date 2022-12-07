@@ -65,23 +65,37 @@ const job = async () => {
     try {
       const cloudscraper = require("cloudscraper");
 
+      console.time("Getting Anime Document");
       const querySnapshot = await getDocs(
         collection(firestore, "observedAnimeList")
       );
+      console.timeEnd("Getting Anime Document");
 
+      console.time("Iterating Through Users");
       for (const document of querySnapshot.docs) {
+        console.time("Getting User Data");
         let { observedAnimeList } = document.data() as {
           observedAnimeList: observedAnime[];
         };
+        console.timeEnd("Getting User Data");
 
+        console.time("Getting User Messenger Id");
         let messengerIdSnapshot = await getDoc(
           doc(firestore, "messengerId", document.id)
         );
+        console.timeEnd("Getting User Messenger Id");
 
+        console.time("Iterating Through Animes");
         for (const anime of observedAnimeList) {
+          console.time("Getting page");
           let html = await cloudscraper.get(anime.url);
-          const $ = load(html);
+          console.timeEnd("Getting page");
 
+          console.time("Loading HTML");
+          const $ = load(html);
+          console.timeEnd("Loading HTML");
+
+          console.time("Iterating Though Episodes");
           let episodeList = $(".eplister > ul > li > a");
 
           episodeList.each((i, el) => {
@@ -102,25 +116,33 @@ const job = async () => {
               if (messengerIdSnapshot.exists()) {
                 let { id } = messengerIdSnapshot.data();
                 if (id) {
+                  console.time("Sending Message");
                   sendMessage(id, anime.name, title, number, url);
+                  console.timeEnd("Sending Message");
                 }
               }
             }
           });
 
+          console.timeEnd("Iterating Though Episodes");
+
           anime.lastSeenEpisode = episodeList.length;
         }
+        console.timeEnd("Iterating Through Animes");
 
+        console.time("Updating DB");
         await setDoc(doc(firestore, "observedAnimeList", document.id), {
           observedAnimeList,
         });
+        console.timeEnd("Updating DB");
       }
+      console.timeEnd("Iterating Through Users");
     } catch {
       status = "Failure";
     }
   };
 
-  processData();
+  await processData();
 
   return status;
 };
