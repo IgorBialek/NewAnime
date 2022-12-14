@@ -5,7 +5,7 @@ import { serve } from 'inngest/next';
 const job = async () => {
   let status = "Success";
 
-  axios.get(process.env.BACKGROUND_PROCESSING_API_ENDPOINT!);
+  await axios.get(process.env.BACKGROUND_PROCESSING_API_ENDPOINT!);
 
   return status;
 };
