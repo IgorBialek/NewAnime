@@ -1,0 +1,12 @@
+name: Anime Processing
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hit Endpoint
+        run: |
+          curl --request GET \
+          --url 'https://bristle-nutritious-wildflower.glitch.me' \
