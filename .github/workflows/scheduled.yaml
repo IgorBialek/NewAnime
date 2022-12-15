@@ -9,4 +9,4 @@ jobs:
       - name: Hit Endpoint
         run: |
           curl --request GET \
-          --url 'https://bristle-nutritious-wildflower.glitch.me' \
+          --url 'https://animerefresher.onrender.com' \
