@@ -2,7 +2,7 @@ import axios from 'axios';
 import { doc, setDoc } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useState } from 'react';
-import { RiRefreshLine, RiSearchLine } from 'react-icons/ri';
+import { RiPlayListAddFill, RiRefreshLine, RiSearchLine } from 'react-icons/ri';
 import { useMediaQuery } from 'react-responsive';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -119,7 +119,7 @@ const AddAnime = () => {
   return (
     <div className={css.addAnimeContainer}>
       <Button type="secondary" onClick={openHandler}>
-        <RiSearchLine />
+        <RiPlayListAddFill />
       </Button>
       <input
         type={"url"}

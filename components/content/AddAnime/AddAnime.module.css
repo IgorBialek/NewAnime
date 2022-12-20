@@ -15,6 +15,7 @@
   background-color: var(--color-3);
   color: var(--color-text);
   width: 50%;
+  height: 49px;
 
   transition: 0.2s;
 }

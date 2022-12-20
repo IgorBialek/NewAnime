@@ -3,14 +3,12 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 750px;
+  align-self: center;
 }
 
 .scrollContainer {
-  max-width: 50%;
+  max-width: 100%;
   gap: 15px;
   display: flex;
-}
-
-.mobileScrollContainer {
-  max-width: 100%;
 }

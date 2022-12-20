@@ -1,15 +1,15 @@
-import 'react-indiana-drag-scroll/dist/style.css';
+import "react-indiana-drag-scroll/dist/style.css";
 
-import { doc, setDoc } from 'firebase/firestore';
-import { useSession } from 'next-auth/react';
-import ScrollContainer from 'react-indiana-drag-scroll';
-import { useMediaQuery } from 'react-responsive';
-import { useRecoilValue } from 'recoil';
+import { doc, setDoc } from "firebase/firestore";
+import { useSession } from "next-auth/react";
+import ScrollContainer from "react-indiana-drag-scroll";
+import { useMediaQuery } from "react-responsive";
+import { useRecoilValue } from "recoil";
 
-import { observedAnimeListAtom } from '../../../atoms/observedAnimeList';
-import { firestore } from '../../../firebase';
-import AnimeTile from './AnimeTile';
-import css from './AnimeTileList.module.css';
+import { observedAnimeListAtom } from "../../../atoms/observedAnimeList";
+import { firestore } from "../../../firebase";
+import AnimeTile from "./AnimeTile";
+import css from "./AnimeTileList.module.css";
 
 const AnimeTileList = () => {
   const { data: session } = useSession();
@@ -29,9 +29,7 @@ const AnimeTileList = () => {
   return (
     <div className={css.animeListContainer}>
       <ScrollContainer
-        className={`${css.scrollContainer} ${
-          isMobile ? css.mobileScrollContainer : ""
-        }`}
+        className={`${css.scrollContainer}`}
         mouseScroll={{ ignoreElements: "svg" }}
       >
         {observedAnimeList.map((a) => (

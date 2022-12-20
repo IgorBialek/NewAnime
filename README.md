@@ -1,34 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# NewAnime
 
-First, run the development server:
+Would you like to receive notifications whenever a new episode of your favourite anime comes out? This app will ensure that you are up to date.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+https://newanime.vercel.app
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Features
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### User Account
+You can create your user account or use one shared to just have a look at the app by choosing the preview option.
 
-## Learn More
+![App Screenshot](https://i.imgur.com/J7jTDie.png)
 
-To learn more about Next.js, take a look at the following resources:
+### Anime
+To add anime to your collection, you have to paste the correct link from the website from which data will be scratched. You can see a list of all anime that can be observed by clicking the button with the list with the plus icon. If the copied URL is correct you can click add and it is all set! Below adding section is a place where you can see and delete your series. From now your anime will be checked every 15 minutes by a cron job and if something will be changed you will receive a messenger message if it is configured right.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![App Screenshot](https://i.imgur.com/xfRwmRc.png)
 
-## Deploy on Vercel
+### Episodes
+In the middle, you can see boxes with anime titles on them. You can click it to see new episodes of that title. To watch particural one all you have to do is just tap it. It is also possible to delete that episode from the list when you have watched it by now by clicking row deletion icon.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![App Screenshot](https://i.imgur.com/ix1w03j.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Messenger
+To use Messenger functionality you must be assigned to the Meta project. If you are, just follow the guide in the bottom section of the app. Configuring it correctly will result in receiving notifications about new episodes! 
+
+![App Screenshot](https://i.imgur.com/2XVUb35.png)
+## Known Issues
+
+Messenger Notifications works only for user who are assigned to Meta project as developer.
+## Tech Stack
+
+- NextJS
+- ReactJS
+- Firebase
+- Typescript
+- NextAuth
+- RecoilJS
+- CloudScraper
+- Cheerio
+- Meta API
+
+
+
+
+## Authors
+
+- [@IgorBialek](https://www.github.com/IgorBialek)
+

@@ -19,6 +19,7 @@
   font-size: 25px;
   margin-right: 7.5px;
   transition: 0.2s;
+  min-width: 25px;
 }
 
 .episodeContainer > svg:hover {
@@ -28,11 +29,11 @@
 
 .number {
   margin: 10px;
+  min-width: 40px;
 }
 
 .title {
-  margin: 0;
-  margin-left: 30px;
+  margin: 0 10px;
 }
 
 .episodeContainer:last-of-type {
